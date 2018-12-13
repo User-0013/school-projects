@@ -1,0 +1,40 @@
+Schemes:
+	A(a,b,c)
+	B(e,f,g)
+	C(c,e,b)
+	F(a,b,c)
+	#added later
+	D(a,b,c)
+	E(g,e,j)
+	G(t,h,c)
+	H(a,b,c)
+	I(e,f,g)
+
+Facts:
+	A('1','1','1').
+	A('2','5','6').
+	A('9','8','2').
+	B('2','1','3').
+	C('1','2','1').
+	C('6','2','5').
+
+Rules:
+	#|F(a,b,c):-A(a,b,c),B(b,c,e),C(c,e,b).
+	F(a,b,c):-C(c),A(a,b,c).|#
+	#|A(a,b,c):-C(c,e,b),E(g,e,j).
+	B(e,f,g):-F(a,b,c).
+	C(c,e,b):-E(g,e,j).
+	D(a,b,c):-B(e,f,g),C(c,e,b),F(a,b,c).
+	E(g,e,j):-B(e,f,g),D(a,b,c).
+	F(a,b,c):-F(a,b,c).|#
+	A(a,b,c):-A(a,b,c).
+	B(e,f,g):-A(a,b,c),B(e,f,g).
+	C(c,e,b):-B(e,f,g).
+	D(a,b,c):-B(e,f,g).
+	E(g,e,j):-B(a,b,c),D(a,b,c),E(g,e,j).
+	F(a,b,c):-D(a,b,c),E(g,e,j).
+	G(t,h,c):-D(a,b,c),E(g,e,j).
+	H(a,b,c):-
+
+Queries:
+	F(X,Y,Z)?
